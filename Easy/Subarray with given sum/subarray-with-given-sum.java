@@ -41,27 +41,23 @@ class Solution
     //Function to find a continuous sub-array which adds up to a given number.
     static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
     {
-       ArrayList<Integer> al = new ArrayList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int i=0,j=0;
         int sum=0;
-        int start=0;
-        boolean flag=false;
-        for(int i=0;i<n;i++){
-            sum+=arr[i];
-            while(sum>s && start<i){
-                    sum-=arr[start];
-                    start++;
+        while(j<n){
+            sum+=arr[j];
+            while(i<j && sum>s){
+                sum-=arr[i];
+                i++;
             }
-            
             if(sum==s){
-                al.add(start+1);
-                al.add(i+1);
-                flag = true;
-                break;
+                ans.add(i+1);
+                ans.add(j+1);
+                return ans;
             }
+            j++;
         }
-        if(flag==false){
-            al.add(-1);
-        }
-        return al;
+        ans.add(-1);
+        return ans;
     }
 }
