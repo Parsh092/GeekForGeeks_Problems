@@ -25,19 +25,20 @@ class GfG {
 // User function Template for Java
 
 class Solution {
-    public long count(int coin[], int n, int sum) {
-        
-        long[][] dp = new long[n+1][sum+1];
-        for(int i=0;i<=n;i++) dp[i][0]=1;
-        
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=sum;j++){
-                dp[i][j] = dp[i-1][j];
-                if(coin[i-1]<=j){
-                  dp[i][j] += dp[i][j-coin[i-1]];
-                }
-            }
+    static long f(int i,int j,int sum,int[] coins,long[][] dp){
+        if(i<0) return 0;
+        if(j==0) return 1;
+        if(dp[i][j]!=-1) return dp[i][j];
+        long nottake = f(i-1,j,sum,coins,dp);
+        long take = 0;
+        if(coins[i]<=sum){
+            take = f(i,j-coins[i],sum-coins[i],coins,dp);
         }
-        return dp[n][sum];
+        return dp[i][j] = take + nottake;
+    }
+    public long count(int coins[], int n, int sum) {
+        long[][] dp = new long[n][sum+1];
+        for(long[] row : dp) Arrays.fill(row,-1);
+        return f(n-1,sum,sum,coins,dp);
     }
 }
