@@ -29,9 +29,8 @@ class GFG {
 
 class Solution {
     int missingNumber(int array[], int n) {
-        
-        int sum = 0;
+        int sum=0;
         for(int i : array) sum+=i;
-        return ((n*(n+1))/2) - sum;
+        return (n*(n+1)/2) - sum;
     }
 }
