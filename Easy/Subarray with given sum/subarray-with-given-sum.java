@@ -42,9 +42,10 @@ class Solution
     static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
     {
         HashMap<Integer,Integer> map = new HashMap<>();
+        map.put(0,1);
+        int sum = 0;
         ArrayList<Integer> ans = new ArrayList<>();
-        int sum=0;
-        map.put(sum,1);
+        
         for(int i=0;i<n;i++){
             sum+=arr[i];
             if(sum==s){
