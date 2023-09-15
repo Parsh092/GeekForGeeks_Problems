@@ -31,26 +31,28 @@ class GFG{
 // User function Template for Java
 
 class Solution{
-    
     static int f(int i,int target,int[] arr,int[][] dp){
-        if(target==0) return 1;
-        if(i==0) return target==arr[i]?1:0;
-        if(dp[i][target]!=-1) return dp[i][target];
-        int nottake = f(i-1,target,arr,dp);
-        int take = 0;
-        if(target>=arr[i]){
-            take = f(i-1,target-arr[i],arr,dp);
+        if(i==arr.length){
+            return target==0?1:0;
         }
-        return dp[i][target]= take | nottake;
+        if(dp[i][target]!=-1) return dp[i][target];
+        int nottake = f(i+1,target,arr,dp);
+        int take = 0;
+        if(arr[i]<=target){
+            take = f(i+1,target-arr[i],arr,dp);
+        }
+        dp[i][target] = take | nottake;
+        return dp[i][target];
     }
     static int equalPartition(int n, int arr[])
     {
-        int sum = 0;
+        int sum=0;
         for(int i : arr) sum+=i;
-        if(sum%2!=0) return 0;
-        int target = sum/2;
-        int[][] dp = new int[n][target+1];
-        for(int[] rows : dp) Arrays.fill(rows,-1);
-        return f(n-1,target,arr,dp);
+        if(sum%2!=0) return -1;
+        int[][] dp = new int[n][(sum/2)+1];
+        for(int[] rows : dp){
+            Arrays.fill(rows,-1);
+        }
+        return f(0,sum/2,arr,dp);
     }
 }
