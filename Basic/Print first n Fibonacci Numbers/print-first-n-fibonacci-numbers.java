@@ -41,15 +41,11 @@ class Solution
     //Function to return list containing first n fibonacci numbers.
     public static long[] printFibb(int n) 
     {
-        long[] ans = new long[n];
-        for(int i=0;i<n;i++){
-            if(i<=1){
-                ans[i]=1;
-            }
-            else{
-                ans[i] = ans[i-1] + ans[i-2];
-            }
-        }
-        return ans;
+         long[] ans = new long[n];
+         for(int i=0;i<n;i++){
+             if(i<=1) ans[i]=1;
+             else ans[i] = ans[i-1] + ans[i-2];
+         }
+         return ans;
     }
 }
