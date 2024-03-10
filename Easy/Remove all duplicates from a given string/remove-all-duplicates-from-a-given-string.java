@@ -30,11 +30,10 @@ public class Main {
 class Solution {
     String removeDuplicates(String str) {
         String ans = "";
-        for(int i=0;i<str.length();i++){
+        ans += str.charAt(0);
+        for(int i=1;i<str.length();i++){
             char ch = str.charAt(i);
-            if(ans=="" || ans.indexOf(ch)==-1){
-                ans+=ch;
-            }
+            if(ans.indexOf(ch)==-1) ans+=ch;
         }
         return ans;
     }
